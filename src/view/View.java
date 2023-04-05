@@ -19,7 +19,7 @@ public class View{
 		return input.nextShort();
 	}
     public short readMenu(){
-        String menuText = "1.Añadir habitación"+"\n"+"2. Ingresar paciente"+"\n"+"3.  Mostrar historial de pacientes por habitación"+"\n"+"4.  Generar XML"+"\n"+"5. Salir";
+        String menuText = "Bienvenidos al Control de pacientes de Colsanitas"+"\n\n"+"1.Añadir habitación"+"\n"+"2. Ingresar paciente"+"\n"+"3.  Mostrar historial de pacientes por habitación"+"\n"+"4.  Generar XML"+"\n"+"5. Salir";
         return readShort(menuText);
     }
 }

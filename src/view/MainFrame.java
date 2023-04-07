@@ -7,6 +7,7 @@ public class MainFrame extends JFrame {
 
     private MainPanel mainPanel;
     private RoomPanel roomPanel;
+    private PatientPanel patientPanel;
     public MainFrame() {
         super("Menu");
         setLayout(new GridBagLayout());
@@ -26,6 +27,12 @@ public class MainFrame extends JFrame {
     private void addComponents() {
         addMainPanel();
         addRoomPanel();
+        addPatientPanel();
+    }
+
+    private void addPatientPanel() {
+        getContentPane().add(patientPanel);
+        patientPanel.setVisible(false);
     }
 
     private void addMainPanel() {
@@ -41,6 +48,7 @@ public class MainFrame extends JFrame {
     private void initComponents() {
         mainPanel = new MainPanel();
         roomPanel = new RoomPanel();
+        patientPanel = new PatientPanel();
     }
 
     private void showErrorMessage(String message) {

@@ -6,6 +6,7 @@ import java.awt.*;
 public class MainFrame extends JFrame {
 
     private MainPanel mainPanel;
+    private RoomPanel roomPanel;
     public MainFrame() {
         super("Menu");
         setLayout(new GridBagLayout());
@@ -24,6 +25,7 @@ public class MainFrame extends JFrame {
 
     private void addComponents() {
         addMainPanel();
+        addRoomPanel();
     }
 
     private void addMainPanel() {
@@ -31,8 +33,14 @@ public class MainFrame extends JFrame {
         mainPanel.getOutButton().addActionListener(e -> dispose());
     }
 
+    private void addRoomPanel() {
+        getContentPane().add(roomPanel);
+        roomPanel.setVisible(false);
+    }
+
     private void initComponents() {
         mainPanel = new MainPanel();
+        roomPanel = new RoomPanel();
     }
 
     private void showErrorMessage(String message) {

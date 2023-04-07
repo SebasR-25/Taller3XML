@@ -35,9 +35,11 @@ public class PatientPanel extends JPanel {
         buttonSetFeatures(addButton);
         buttonSetFeatures(cancelButton);
         textFieldSetFeatures(roomNumberField);
+        ((AbstractDocument) roomNumberField.getDocument()).setDocumentFilter(new NumericDocumentFilter());
         textFieldSetFeatures(patientNameField);
         textFieldSetFeatures(patientLastNameField);
         textFieldSetFeatures(patientPhoneField);
+        ((AbstractDocument) patientPhoneField.getDocument()).setDocumentFilter(new NumericDocumentFilter());
     }
 
     private void buttonSetFeatures(JButton button) {
@@ -49,7 +51,6 @@ public class PatientPanel extends JPanel {
     private void textFieldSetFeatures(JTextField textField) {
         textField.setPreferredSize(new Dimension(400, 30));
         textField.setFont(Globals.FIELD_FONT);
-        ((AbstractDocument) textField.getDocument()).setDocumentFilter(new NumericDocumentFilter());
     }
 
     private void addComponents() {

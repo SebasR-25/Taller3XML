@@ -5,7 +5,11 @@ import java.awt.*;
 
 public class MainPanel extends JPanel {
     private JLabel titleLabel;
-    private JButton addRoomButton, addPatientRoom, showRoomsPatientHistory, generateXmlButton, outButton;
+    private JButton addRoomButton;
+    private JButton addPatientRoom;
+    private JButton showRoomsPatientHistory;
+    private JButton generateXmlButton;
+    private JButton outButton;
 
     public MainPanel() {
         setLayout(new GridBagLayout());

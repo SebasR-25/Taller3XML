@@ -6,8 +6,12 @@ import java.awt.*;
 
 public class PatientPanel extends JPanel {
     private JLabel titleLabel;
-    private JTextField roomNumberField, patientNameField,patientLastNameField, patientPhoneField;
-    private JButton addButton, cancelButton;
+    private JTextField roomNumberField;
+    private JTextField patientNameField;
+    private JTextField patientLastNameField;
+    private JTextField patientPhoneField;
+    private JButton addButton;
+    private JButton cancelButton;
 
     public PatientPanel() {
         setLayout(new GridBagLayout());

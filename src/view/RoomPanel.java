@@ -6,8 +6,12 @@ import java.awt.*;
 
 public class RoomPanel extends JPanel {
     private JLabel titleLabel;
-    private JTextField idTextField, floorTextField, roomNumberTextField, bedNumberTextField;
-    private JButton createRoomButton, backButton;
+    private JTextField idTextField;
+    private JTextField floorTextField;
+    private JTextField roomNumberTextField;
+    private JTextField bedNumberTextField;
+    private JButton createRoomButton;
+    private JButton backButton;
 
     public RoomPanel() {
         setLayout(new GridBagLayout());

@@ -23,7 +23,12 @@ public class MainFrame extends JFrame {
     }
 
     private void addComponents() {
+        addMainPanel();
+    }
+
+    private void addMainPanel() {
         getContentPane().add(mainPanel);
+        mainPanel.getOutButton().addActionListener(e -> dispose());
     }
 
     private void initComponents() {

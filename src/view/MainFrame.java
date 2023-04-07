@@ -37,9 +37,4 @@ public class MainFrame extends JFrame {
     public void start() {
         setVisible(true);
     }
-
-    public static void main(String[] args) {
-        MainFrame mainFrame = new MainFrame();
-        mainFrame.start();
-    }
 }

@@ -59,4 +59,32 @@ public class RoomPanel extends JPanel {
         textField.setPreferredSize(new Dimension(300, 30));
         textField.setFont(Globals.FIELD_FONT);
     }
+
+    public JLabel getTitleLabel() {
+        return titleLabel;
+    }
+
+    public JTextField getIdTextField() {
+        return idTextField;
+    }
+
+    public JTextField getFloorTextField() {
+        return floorTextField;
+    }
+
+    public JTextField getRoomNumberTextField() {
+        return roomNumberTextField;
+    }
+
+    public JTextField getBedNumberTextField() {
+        return bedNumberTextField;
+    }
+
+    public JButton getCreateRoomButton() {
+        return createRoomButton;
+    }
+
+    public JButton getBackButton() {
+        return backButton;
+    }
 }

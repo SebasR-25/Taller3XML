@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
-
     private MainPanel mainPanel;
     private RoomPanel roomPanel;
     private PatientPanel patientPanel;
+
     public MainFrame() {
         super("Menu");
         setLayout(new GridBagLayout());
@@ -24,31 +24,66 @@ public class MainFrame extends JFrame {
         setVisible(false);
     }
 
+    private void initComponents() {
+        mainPanel = new MainPanel();
+        roomPanel = new RoomPanel();
+        patientPanel = new PatientPanel();
+    }
+
     private void addComponents() {
         addMainPanel();
         addRoomPanel();
         addPatientPanel();
     }
 
-    private void addPatientPanel() {
-        getContentPane().add(patientPanel);
-        patientPanel.setVisible(false);
-    }
-
     private void addMainPanel() {
         getContentPane().add(mainPanel);
         mainPanel.getOutButton().addActionListener(e -> dispose());
+        mainPanel.getAddRoomButton().addActionListener(e -> {
+            mainPanel.setVisible(false);
+            roomPanel.setVisible(true);
+            patientPanel.setVisible(false);
+        });
+        mainPanel.getAddPatientRoom().addActionListener(e -> {
+            mainPanel.setVisible(false);
+            roomPanel.setVisible(false);
+            patientPanel.setVisible(true);
+        });
+
     }
 
     private void addRoomPanel() {
         getContentPane().add(roomPanel);
         roomPanel.setVisible(false);
+        roomPanel.getBackButton().addActionListener(e -> backToPrincipalMenu());
     }
 
-    private void initComponents() {
-        mainPanel = new MainPanel();
-        roomPanel = new RoomPanel();
-        patientPanel = new PatientPanel();
+    private void addPatientPanel() {
+        getContentPane().add(patientPanel);
+        patientPanel.setVisible(false);
+        patientPanel.getCancelButton().addActionListener(e -> backToPrincipalMenu());
+    }
+
+    private void backToPrincipalMenu() {
+        mainPanel.setVisible(true);
+        roomPanel.setVisible(false);
+        patientPanel.setVisible(false);
+        clearRoomFields();
+        clearPatientFields();
+    }
+
+    private void clearRoomFields() {
+        roomPanel.getIdTextField().setText("");
+        roomPanel.getFloorTextField().setText("");
+        roomPanel.getRoomNumberTextField().setText("");
+        roomPanel.getBedNumberTextField().setText("");
+    }
+
+    private void clearPatientFields() {
+        patientPanel.getRoomNumberField().setText("");
+        patientPanel.getPatientNameField().setText("");
+        patientPanel.getPatientLastNameField().setText("");
+        patientPanel.getPatientPhoneField().setText("");
     }
 
     private void showErrorMessage(String message) {

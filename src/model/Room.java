@@ -7,7 +7,7 @@ public class Room{
     private int floorNumber;
     private int id;
     private List<Patient> patients;
-    private int reoomNumber;
+    private int roomNumber;
     
     public void addPatient(Patient patient){
         patients.add(patient);
@@ -33,10 +33,10 @@ public class Room{
     public List<Patient> getPatients() {
         return patients;
     }
-    public int getReoomNumber() {
-        return reoomNumber;
+    public int getRoomNumber() {
+        return roomNumber;
     }
-    public void setReoomNumber(int reoomNumber) {
-        this.reoomNumber = reoomNumber;
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 }

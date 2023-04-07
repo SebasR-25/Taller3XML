@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
 import java.awt.*;
 
 public class RoomPanel extends JPanel {
@@ -58,6 +59,7 @@ public class RoomPanel extends JPanel {
     private void textFieldSetFeatures(JTextField textField) {
         textField.setPreferredSize(new Dimension(300, 30));
         textField.setFont(Globals.FIELD_FONT);
+        ((AbstractDocument) textField.getDocument()).setDocumentFilter(new NumericDocumentFilter());
     }
 
     public JLabel getTitleLabel() {

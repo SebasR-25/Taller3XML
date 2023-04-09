@@ -33,7 +33,7 @@ public class Room{
     public List<Patient> getPatients() {
         return patients;
     }
-    public int getroomNumber() {
+    public int getRoomNumber() {
         return roomNumber;
     }
     public void setRoomNumber(int roomNumber) {

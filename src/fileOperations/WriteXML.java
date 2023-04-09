@@ -38,6 +38,7 @@ public class WriteXML {
         for (int i = 0; i < habitaciones.size(); i++) {
             Room tempRoom = habitaciones.get(i);
             Element room = document.createElement("room");
+            room.setAttribute("id", tempRoom.getId()+"");
 
             Element floorNumber = document.createElement("piso");
             Text floorText = document.createTextNode(tempRoom.getFloorNumber() + "");

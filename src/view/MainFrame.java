@@ -2,14 +2,17 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MainFrame extends JFrame {
     private MainPanel mainPanel;
     private RoomPanel roomPanel;
     private PatientPanel patientPanel;
+    private ActionListener actionListener;
 
-    public MainFrame() {
+    public MainFrame(ActionListener actionListener) {
         super("Menu");
+        this.actionListener = actionListener;
         setLayout(new GridBagLayout());
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

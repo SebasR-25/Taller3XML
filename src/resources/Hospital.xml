@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Hospital>
+    <rooms>
+        <room id="1">
+            <floorNumber>1</floorNumber>
+            <roomNumber>101</roomNumber>
+            <patient>
+                <firstName>Juan</firstName>
+                <lastName>Perez</lastName>
+                <contactPhoneNumber>3222556565</contactPhoneNumber>
+            </patient>
+            <patient>
+                <firstName>Pedro</firstName>
+                <lastName>Perez</lastName>
+                <contactPhoneNumber>3122556565</contactPhoneNumber>
+            </patient>
+        </room>
+        <room id="2">
+            <floorNumber>1</floorNumber>
+            <roomNumber>102</roomNumber>
+            <patient>
+                <firstName>Carlos</firstName>
+                <lastName>Perez</lastName>
+                <contactPhoneNumber>3222556565</contactPhoneNumber>
+            </patient>
+            <patient>
+                <firstName>Jose</firstName>
+                <lastName>Perez</lastName>
+                <contactPhoneNumber>3122556565</contactPhoneNumber>
+            </patient>
+        </room>
+    </rooms>
+</Hospital>

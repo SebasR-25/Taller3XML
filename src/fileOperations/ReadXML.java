@@ -2,10 +2,12 @@ package fileOperations;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -16,9 +18,17 @@ import model.Room;
 
 public class ReadXML {
     public List<Room> readRooms;
-    
-    public void readXML() throws SAXException, ParserConfigurationException, IOException{
-        File xmlFile = new File ("src/resources/Hospital.xml");
+
+    public ReadXML() {
+        readRooms = new ArrayList<>();
+    }
+
+    public List<Room> getReadRooms() {
+        return readRooms;
+    }
+
+    public void readXML() throws SAXException, ParserConfigurationException, IOException {
+        File xmlFile = new File("src/resources/Hospital.xml");
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(xmlFile);
@@ -31,14 +41,14 @@ public class ReadXML {
             if (room.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element) room;
                 tempRoom.setId(Integer.parseInt(element.getAttribute("id")));
-                tempRoom.setFloorNumber(Integer.parseInt(element.getElementsByTagName("floorNumber").item(0).getTextContent()));   
+                tempRoom.setFloorNumber(Integer.parseInt(element.getElementsByTagName("floorNumber").item(0).getTextContent()));
                 tempRoom.setRoomNumber(Integer.parseInt(element.getElementsByTagName("roomNumber").item(0).getTextContent()));
-                
-                NodeList patientList = document.getElementsByTagName("patient");
-                for(int j = 0; i < patientList.getLength(); j++){
+
+                NodeList patientList = element.getElementsByTagName("patient");
+                for (int j = 0; j < patientList.getLength(); j++) {
                     Patient tempPatient = new Patient();
                     Node patient = patientList.item(j);
-                    if(patient.getNodeType() == Node.ELEMENT_NODE){
+                    if (patient != null && patient.getNodeType() == Node.ELEMENT_NODE) {
                         Element element2 = (Element) patient;
                         tempPatient.setFirstName(element2.getElementsByTagName("firstName").item(0).getTextContent());
                         tempPatient.setLastName(element2.getElementsByTagName("lastName").item(0).getTextContent());
@@ -47,6 +57,7 @@ public class ReadXML {
                     tempRoom.addPatient(tempPatient);
                 }
             }
+            readRooms.add(tempRoom);
         }
-    } 
+    }
 }

@@ -40,34 +40,35 @@ public class WriteXML {
             Element room = document.createElement("room");
             room.setAttribute("id", tempRoom.getId()+"");
 
-            Element floorNumber = document.createElement("piso");
+            Element floorNumber = document.createElement("floorNumber");
             Text floorText = document.createTextNode(tempRoom.getFloorNumber() + "");
             floorNumber.appendChild(floorText);
             room.appendChild(floorNumber);
 
-            Element roomNumber = document.createElement("numero de habitacion");
+            Element roomNumber = document.createElement("roomNumber");
             Text roomText = document.createTextNode(tempRoom.getRoomNumber() + "");
-            floorNumber.appendChild(roomText);
+            roomNumber.appendChild(roomText);
             room.appendChild(roomNumber);
 
+            List<Patient> tempPatientList =tempRoom.getPatients();
             for (int a = 0; a < tempRoom.getPatients().size(); a++) {
-                List<Patient> tempPatientList =tempRoom.getPatients();
-                Element patient = document.createElement("paciente");
+                Element patient = document.createElement("patient");
 
-                Element firstName = document.createElement("nombre");
-                Text firstNameText = document.createTextNode(tempPatientList.get(i).getFirstName());
+                Element firstName = document.createElement("firstName");
+                Text firstNameText = document.createTextNode(tempPatientList.get(a).getFirstName());
                 firstName.appendChild(firstNameText);
                 patient.appendChild(firstName);
 
-                Element lastName = document.createElement("apellido");
-                Text lastNameText = document.createTextNode(tempPatientList.get(i).getLastName());
+                Element lastName = document.createElement("lastName");
+                Text lastNameText = document.createTextNode(tempPatientList.get(a).getLastName());
                 lastName.appendChild(lastNameText);
                 patient.appendChild(lastName);
 
-                Element contactPhoneNumber = document.createElement("nuimero de contacto");
-                Text contactPhoneNumberText = document.createTextNode(tempPatientList.get(i).getContactPhoneNumber());
+                Element contactPhoneNumber = document.createElement("contactPhoneNumber");
+                Text contactPhoneNumberText = document.createTextNode(tempPatientList.get(a).getContactPhoneNumber());
                 contactPhoneNumber.appendChild(contactPhoneNumberText);
                 patient.appendChild(contactPhoneNumber);
+                room.appendChild(patient);
             }
             rooms.appendChild(room);
         }

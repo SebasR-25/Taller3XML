@@ -26,4 +26,8 @@ public class RoomManager {
         }
         return null;
     }
+
+    public void addRoom(Room room) {
+        rooms.add(room);
+    }
 }

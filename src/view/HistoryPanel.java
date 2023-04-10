@@ -26,7 +26,8 @@ public class HistoryPanel extends JPanel {
         setPatientsData(List.of("Juan", "Perez", "123456789", "Activo", "Pedro", "Gomez", "987654321", "Activo", "Maria", "Gonzalez", "123456789", "Activo", "Jose", "Perez", "987654321", "Activo", "Juan", "Perez", "123456789", "Activo"));
     }
 
-    private void loadDefaultValues() {
+    public void loadDefaultValues() {
+        idRoomField.setText("");
         setRoomLabelInfo(List.of("NO ELEGIDO", "NO ELEGIDO", "NO ELEGIDO", "NO ELEGIDO"));
         setPatientsData(new ArrayList<>());
     }
@@ -86,18 +87,20 @@ public class HistoryPanel extends JPanel {
     }
 
     public void setPatientsData(List<String> patientData) {
+        historicalTextArea.setText("");
         for (int i = 0; i < patientData.size() / 4; i++) {
-            historicalTextArea.append("Paciente " + i+1 + ": ");
+            historicalTextArea.append("Paciente " + (i + 1) + ": ");
             historicalTextArea.append("\n    Nombre: " + patientData.get(i * 4));
-            historicalTextArea.append("\n    Apellido: " + patientData.get(i * 4 + 1));
-            historicalTextArea.append("\n    Telefono: " + patientData.get(i * 4 + 2));
-            historicalTextArea.append("\n    Estado: " + patientData.get(i * 4 + 3));
+            historicalTextArea.append("\n    Apellido: " + patientData.get((i * 4) + 1));
+            historicalTextArea.append("\n    Telefono: " + patientData.get((i * 4) + 2));
+            historicalTextArea.append("\n    Estado: " + patientData.get((i * 4) + 3));
             historicalTextArea.append("\n\n");
         }
     }
+
     public void setRoomLabelInfo(List<String> roomData) {
-        String builder = "Numero de habitaci\u00f3n " + roomData.get(0) +
-                "<br>    N\u00famero de habitaci\u00f3n: " + roomData.get(1) +
+        String builder = "Id de la habitaci\u00f3n " + roomData.get(0) +
+                "<br>    N\u00famero de la habitaci\u00f3n: " + roomData.get(1) +
                 "<br>    N\u00famero de piso: " + roomData.get(2) +
                 "<br>    N\u00famero de camas: " + roomData.get(3);
         roomLabelInfo.setText("<html><center><h2>Información de la habitación</h2><h3>" + builder + "</h3></center></html>");

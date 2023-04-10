@@ -66,6 +66,8 @@ public class MainFrame extends JFrame {
         });
         historyPanel.getSearchButton().addActionListener(actionListener);
         historyPanel.getSearchButton().setActionCommand("SEARCH_ROOM");
+        mainPanel.getGenerateXmlButton().addActionListener(actionListener);
+        mainPanel.getGenerateXmlButton().setActionCommand("GENERATE_XML");
     }
 
     private void addRoomPanel() {

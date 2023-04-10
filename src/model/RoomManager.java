@@ -10,4 +10,20 @@ public class RoomManager {
         rooms = new ArrayList<>();
     }
 
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public Room searchRoom(int idRoom) {
+        for (Room room : rooms) {
+            if (room.getId() == idRoom) {
+                return room;
+            }
+        }
+        return null;
+    }
 }

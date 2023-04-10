@@ -85,6 +85,8 @@ public class Presenter implements ActionListener {
         switch (actionEvent.getActionCommand()) {
             case "CREATE_PATIENT":
                 addPatient(view.getRoomNumberToPatient(), view.getPatientName(), view.getPatientLastName(), view.getContactPhoneNumber());
+                view.showSuccessMessage("Paciente creado con exito");
+                view.clearPatientFields();
                 break;
             case "CREATE_ROOM":
                 addRoom(Integer.parseInt(view.getNewRoomId()), Integer.parseInt(view.getNewRoomFloor()), Integer.parseInt(view.getNewRoomNumber()), Integer.parseInt(view.getNewRoomBedNumber()));
@@ -121,26 +123,28 @@ public class Presenter implements ActionListener {
     private Room searchRoom(int idRoom) {
         if (idRoom < 0) {
             view.showErrorMessage("El id de la habitación debe ser mayor que 0");
-        } else if (roomManager.searchRoom(idRoom) == null) {
+        } else if (roomManager.searchRoomById(idRoom) == null) {
             view.showErrorMessage("La habitación no existe");
         } else {
             view.showSuccessMessage("La habitación ha sido encontrada");
-            return roomManager.searchRoom(idRoom);
+            return roomManager.searchRoomById(idRoom);
         }
         return null;
     }
+
     private Room searchRoomByNumber(int roomNumber) {
         if (roomNumber < 0) {
             view.showErrorMessage("El número de la habitación debe ser mayor que 0");
-        } else if (roomManager.searchRoom(roomNumber) == null) {
+        } else if (roomManager.searchRoomByNumber(roomNumber) == null) {
             view.showErrorMessage("La habitación no existe");
         } else {
             view.showSuccessMessage("La habitación ha sido encontrada");
-            return roomManager.searchRoom(roomNumber);
+            return roomManager.searchRoomByNumber(roomNumber);
         }
         return null;
     }
-    private void addPatient(int roomNumber, String firstName, String lastName, String contactPhoneNumber){
+
+    private void addPatient(int roomNumber, String firstName, String lastName, String contactPhoneNumber) {
         Patient tempPatient = new Patient(contactPhoneNumber, firstName, lastName, Status.ACTIVE);
         Room tempRoom = searchRoomByNumber(roomNumber);
         roomManager.addPatient(tempRoom, tempPatient);

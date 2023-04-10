@@ -18,9 +18,18 @@ public class RoomManager {
         this.rooms = rooms;
     }
 
-    public Room searchRoom(int idRoom) {
+    public Room searchRoomById(int idRoom) {
         for (Room room : rooms) {
             if (room.getId() == idRoom) {
+                return room;
+            }
+        }
+        return null;
+    }
+
+    public Room searchRoomByNumber(int roomNumber) {
+        for (Room room : rooms) {
+            if (room.getRoomNumber() == roomNumber) {
                 return room;
             }
         }
@@ -30,7 +39,8 @@ public class RoomManager {
     public void addRoom(Room room) {
         rooms.add(room);
     }
-    public void addPatient(Room room, Patient patient){
+
+    public void addPatient(Room room, Patient patient) {
         room.addPatient(patient);
     }
 }

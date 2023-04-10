@@ -109,7 +109,7 @@ public class MainFrame extends JFrame {
         roomPanel.getBedNumberTextField().setText("");
     }
 
-    private void clearPatientFields() {
+    public void clearPatientFields() {
         patientPanel.getRoomNumberField().setText("");
         patientPanel.getPatientNameField().setText("");
         patientPanel.getPatientLastNameField().setText("");

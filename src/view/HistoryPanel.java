@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,7 @@ public class HistoryPanel extends JPanel {
         add(new JLabel("<html><center><h2>Id de la habitacion a buscar</h2></center></html>"), new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 10, 0, 10), 0, 0));
         idRoomField.setPreferredSize(new Dimension(150, 50));
         idRoomField.setFont(Globals.FIELD_FONT);
+        ((AbstractDocument) idRoomField.getDocument()).setDocumentFilter(new NumericDocumentFilter());
         add(idRoomField, new GridBagConstraints(0, 2, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(-40, 10, 0, 10), 0, 0));
     }
 

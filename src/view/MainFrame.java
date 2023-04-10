@@ -3,11 +3,13 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class MainFrame extends JFrame {
     private MainPanel mainPanel;
     private RoomPanel roomPanel;
     private PatientPanel patientPanel;
+    private HistoryPanel historyPanel;
     private ActionListener actionListener;
 
     public MainFrame(ActionListener actionListener) {
@@ -31,12 +33,14 @@ public class MainFrame extends JFrame {
         mainPanel = new MainPanel();
         roomPanel = new RoomPanel();
         patientPanel = new PatientPanel();
+        historyPanel = new HistoryPanel();
     }
 
     private void addComponents() {
         addMainPanel();
         addRoomPanel();
         addPatientPanel();
+        addHistoryPanel();
     }
 
     private void addMainPanel() {
@@ -46,13 +50,22 @@ public class MainFrame extends JFrame {
             mainPanel.setVisible(false);
             roomPanel.setVisible(true);
             patientPanel.setVisible(false);
+            historyPanel.setVisible(false);
         });
         mainPanel.getAddPatientRoom().addActionListener(e -> {
             mainPanel.setVisible(false);
             roomPanel.setVisible(false);
             patientPanel.setVisible(true);
+            historyPanel.setVisible(false);
         });
-
+        mainPanel.getShowRoomsPatientHistory().addActionListener(e -> {
+            mainPanel.setVisible(false);
+            roomPanel.setVisible(false);
+            patientPanel.setVisible(false);
+            historyPanel.setVisible(true);
+        });
+        historyPanel.getSearchButton().addActionListener(actionListener);
+        historyPanel.getSearchButton().setActionCommand("SEARCH_ROOM");
     }
 
     private void addRoomPanel() {
@@ -67,10 +80,17 @@ public class MainFrame extends JFrame {
         patientPanel.getCancelButton().addActionListener(e -> backToPrincipalMenu());
     }
 
+    private void addHistoryPanel() {
+        getContentPane().add(historyPanel);
+        historyPanel.setVisible(false);
+        historyPanel.getBackButton().addActionListener(e -> backToPrincipalMenu());
+    }
+
     private void backToPrincipalMenu() {
         mainPanel.setVisible(true);
         roomPanel.setVisible(false);
         patientPanel.setVisible(false);
+        historyPanel.setVisible(false);
         clearRoomFields();
         clearPatientFields();
     }
@@ -87,6 +107,10 @@ public class MainFrame extends JFrame {
         patientPanel.getPatientNameField().setText("");
         patientPanel.getPatientLastNameField().setText("");
         patientPanel.getPatientPhoneField().setText("");
+    }
+    public void loadRoomToHistoryPanel(List<String> roomInfo, List<String> patients) {
+        historyPanel.setRoomLabelInfo(roomInfo);
+        historyPanel.setPatientsData(patients);
     }
 
     private void showErrorMessage(String message) {

@@ -23,7 +23,8 @@ public class Presenter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         switch (actionEvent.getActionCommand()) {
-            case "showHistory":
+            case "SEARCH_ROOM":
+//                view.loadRoomToHistoryPanel();
                 break;
             case "generateXML":
                 break;

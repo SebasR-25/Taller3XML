@@ -83,7 +83,7 @@ public class Presenter implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         switch (actionEvent.getActionCommand()) {
             case "CREATE_PATIENT":
-                addPatient(Integer.parseInt(view.getNewPatientRoom()), view.getNewPatientFirstName(), view.getNewPatientLastName(), view.getNewPatientContactPhoneNumber());
+                addPatient(view.getRoomNumberToPatient(), view.getPatientName(), view.getPatientLastName(), view.getContactPhoneNumber());
                 break;
             case "SEARCH_ROOM":
                 Room room = searchRoom(Integer.parseInt(view.getRoomIdToSearch()));
@@ -133,6 +133,6 @@ public class Presenter implements ActionListener {
     private void addPatient(int roomNumber, String firstName, String lastName, String contactPhoneNumber){
         Patient tempPatient = new Patient(contactPhoneNumber, firstName, lastName, Status.ACTIVE);
         Room tempRoom = searchRoomByNumber(roomNumber);
-        tempRoom.addPatient(tempPatient);
+        roomManager.addPatient(tempRoom, tempPatient);
     }
 }

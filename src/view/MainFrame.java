@@ -122,6 +122,18 @@ public class MainFrame extends JFrame {
     public String getRoomIdToSearch() {
         return historyPanel.getIdRoomField().getText();
     }
+    public int getRoomNumberToPatient() {
+        return Integer.parseInt(patientPanel.getRoomNumberField().getText());
+    }
+    public String getPatientName() {
+        return patientPanel.getPatientNameField().getText();
+    }
+    public String getPatientLastName() {
+        return patientPanel.getPatientLastNameField().getText();
+    }
+    public String getContactPhoneNumber() {
+        return patientPanel.getPatientPhoneField().getText();
+    }
 
     public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);

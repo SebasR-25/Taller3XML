@@ -68,6 +68,8 @@ public class MainFrame extends JFrame {
         historyPanel.getSearchButton().setActionCommand("SEARCH_ROOM");
         mainPanel.getGenerateXmlButton().addActionListener(actionListener);
         mainPanel.getGenerateXmlButton().setActionCommand("GENERATE_XML");
+        patientPanel.getAddButton().addActionListener(actionListener);
+        patientPanel.getAddButton().setActionCommand("CREATE_PATIENT");
     }
 
     private void addRoomPanel() {

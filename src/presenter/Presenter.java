@@ -82,6 +82,9 @@ public class Presenter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         switch (actionEvent.getActionCommand()) {
+            case "CREATE_PATIENT":
+                addPatient(Integer.parseInt(view.getNewPatientRoom()), view.getNewPatientFirstName(), view.getNewPatientLastName(), view.getNewPatientContactPhoneNumber());
+                break;
             case "SEARCH_ROOM":
                 Room room = searchRoom(Integer.parseInt(view.getRoomIdToSearch()));
                 if (room != null) {
@@ -115,5 +118,21 @@ public class Presenter implements ActionListener {
             return roomManager.searchRoom(idRoom);
         }
         return null;
+    }
+    private Room searchRoomByNumber(int roomNumber) {
+        if (roomNumber < 0) {
+            view.showErrorMessage("El número de la habitación debe ser mayor que 0");
+        } else if (roomManager.searchRoom(roomNumber) == null) {
+            view.showErrorMessage("La habitación no existe");
+        } else {
+            view.showSuccessMessage("La habitación ha sido encontrada");
+            return roomManager.searchRoom(roomNumber);
+        }
+        return null;
+    }
+    private void addPatient(int roomNumber, String firstName, String lastName, String contactPhoneNumber){
+        Patient tempPatient = new Patient(contactPhoneNumber, firstName, lastName, Status.ACTIVE);
+        Room tempRoom = searchRoomByNumber(roomNumber);
+        tempRoom.addPatient(tempPatient);
     }
 }

@@ -57,7 +57,8 @@ public class Presenter implements ActionListener {
         patients.add(new Patient("987654321", "Antonella", "Rodriguez", Status.ACTIVE));
         patients.add(new Patient("123456789", "Javiera", "Diaz", Status.ACTIVE));
         patients.add(new Patient("987654321", "Micaela", "Perez", Status.ACTIVE));
-        patients.add(new Patient("123456789", "Agustina", "Gomez", Status.ACTIVE));;
+        patients.add(new Patient("123456789", "Agustina", "Gomez", Status.ACTIVE));
+        ;
         List<Room> rooms = new ArrayList<>();
         rooms.add(new Room(5, 1, 1, List.of(patients.get(0), patients.get(1)), 101));
         rooms.add(new Room(5, 1, 2, List.of(patients.get(2), patients.get(3)), 102));
@@ -85,6 +86,11 @@ public class Presenter implements ActionListener {
             case "CREATE_PATIENT":
                 addPatient(view.getRoomNumberToPatient(), view.getPatientName(), view.getPatientLastName(), view.getContactPhoneNumber());
                 break;
+            case "CREATE_ROOM":
+                addRoom(Integer.parseInt(view.getNewRoomId()), Integer.parseInt(view.getNewRoomFloor()), Integer.parseInt(view.getNewRoomNumber()), Integer.parseInt(view.getNewRoomBedNumber()));
+                view.showSuccessMessage("Habitacion creada con exito");
+                view.clearRoomFields();
+                break;
             case "SEARCH_ROOM":
                 Room room = searchRoom(Integer.parseInt(view.getRoomIdToSearch()));
                 if (room != null) {
@@ -95,6 +101,10 @@ public class Presenter implements ActionListener {
                 view.showErrorMessage("No implementado");
                 break;
         }
+    }
+
+    private void addRoom(int id, int floor, int number, int bedNumber) {
+        roomManager.addRoom(new Room(bedNumber, floor, id, new ArrayList<>(), number));
     }
 
     private List<String> getPatientData(Room room) {

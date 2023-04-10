@@ -70,6 +70,8 @@ public class MainFrame extends JFrame {
         mainPanel.getGenerateXmlButton().setActionCommand("GENERATE_XML");
         patientPanel.getAddButton().addActionListener(actionListener);
         patientPanel.getAddButton().setActionCommand("CREATE_PATIENT");
+        roomPanel.getCreateRoomButton().addActionListener(actionListener);
+        roomPanel.getCreateRoomButton().setActionCommand("CREATE_ROOM");
     }
 
     private void addRoomPanel() {
@@ -100,7 +102,7 @@ public class MainFrame extends JFrame {
         historyPanel.loadDefaultValues();
     }
 
-    private void clearRoomFields() {
+    public void clearRoomFields() {
         roomPanel.getIdTextField().setText("");
         roomPanel.getFloorTextField().setText("");
         roomPanel.getRoomNumberTextField().setText("");
@@ -145,5 +147,21 @@ public class MainFrame extends JFrame {
 
     public void start() {
         setVisible(true);
+    }
+
+    public String getNewRoomId() {
+        return roomPanel.getIdTextField().getText();
+    }
+
+    public String getNewRoomFloor() {
+        return roomPanel.getFloorTextField().getText();
+    }
+
+    public String getNewRoomNumber() {
+        return roomPanel.getRoomNumberTextField().getText();
+    }
+
+    public String getNewRoomBedNumber() {
+        return roomPanel.getBedNumberTextField().getText();
     }
 }

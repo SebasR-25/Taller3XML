@@ -26,6 +26,10 @@ public class RoomManager {
         }
         return null;
     }
+
+    public void addRoom(Room room) {
+        rooms.add(room);
+    }
     public void addPatient(Room room, Patient patient){
         room.addPatient(patient);
     }

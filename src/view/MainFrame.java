@@ -93,6 +93,7 @@ public class MainFrame extends JFrame {
         historyPanel.setVisible(false);
         clearRoomFields();
         clearPatientFields();
+        historyPanel.loadDefaultValues();
     }
 
     private void clearRoomFields() {
@@ -108,13 +109,22 @@ public class MainFrame extends JFrame {
         patientPanel.getPatientLastNameField().setText("");
         patientPanel.getPatientPhoneField().setText("");
     }
+
     public void loadRoomToHistoryPanel(List<String> roomInfo, List<String> patients) {
         historyPanel.setRoomLabelInfo(roomInfo);
         historyPanel.setPatientsData(patients);
     }
 
-    private void showErrorMessage(String message) {
+    public String getRoomIdToSearch() {
+        return historyPanel.getIdRoomField().getText();
+    }
+
+    public void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showSuccessMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void start() {

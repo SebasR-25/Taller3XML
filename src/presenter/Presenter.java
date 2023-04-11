@@ -5,19 +5,29 @@ import model.Room;
 import model.RoomManager;
 import model.Status;
 import view.MainFrame;
+import fileOperations.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 public class Presenter implements ActionListener {
     private MainFrame view;
     private RoomManager roomManager;
+    private ReadXML readder;
+    private WriteXML writter;
 
     public Presenter() {
         view = new MainFrame(this);
         roomManager = new RoomManager();
+        readder = new ReadXML();
+        writter = new WriteXML();
         loadDefaultRooms();
     }
 
@@ -72,11 +82,12 @@ public class Presenter implements ActionListener {
         roomManager.setRooms(rooms);
     }
 
-    private void start() {
+    private void start() throws SAXException, ParserConfigurationException, IOException {
+        readder.readXML();
         view.start();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SAXException, ParserConfigurationException, IOException {
         new Presenter().start();
     }
 

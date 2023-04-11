@@ -104,7 +104,7 @@ public class Presenter implements ActionListener {
                 break;
                 case  "EXIT":
                 view.showSuccessMessage("Se cerró exitosamente el programa");
-                view.dispose();
+                System.exit(0);
                 break;
         }
     }

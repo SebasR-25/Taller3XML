@@ -14,6 +14,26 @@
                 <lastName>Perez</lastName>
                 <contactPhoneNumber>3122556565</contactPhoneNumber>
             </patient>
+            <patient>
+                <firstName>Jose</firstName>
+                <lastName>Perez</lastName>
+                <contactPhoneNumber>3222556565</contactPhoneNumber>
+            </patient>
+            <patient>
+                <firstName>Mariano</firstName>
+                <lastName>Perez</lastName>
+                <contactPhoneNumber>3122556565</contactPhoneNumber>
+            </patient>
+            <patient>
+                <firstName>Sebastian</firstName>
+                <lastName>Perez</lastName>
+                <contactPhoneNumber>3222556565</contactPhoneNumber>
+            </patient>
+            <patient>
+                <firstName>Santiago</firstName>
+                <lastName>Perez</lastName>
+                <contactPhoneNumber>3122556565</contactPhoneNumber>
+            </patient>
         </room>
         <room id="2">
             <floorNumber>1</floorNumber>

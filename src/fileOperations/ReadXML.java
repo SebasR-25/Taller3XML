@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import model.Status;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -56,8 +57,21 @@ public class ReadXML {
                     }
                     tempRoom.addPatient(tempPatient);
                 }
+                setBedNumber(tempRoom);
             }
             readRooms.add(tempRoom);
+        }
+    }
+
+    private void setBedNumber(Room tempRoom) {
+        List<Patient> tempPatientList = tempRoom.getPatients();
+        if (tempPatientList.size() <=5) {
+            tempRoom.setBedNumber(tempPatientList.size());
+        } else{
+            tempRoom.setBedNumber(5);
+            for (int i = 5; i < tempPatientList.size(); i++) {
+                tempPatientList.get(i).setStatus(Status.INACTIVE);
+            }
         }
     }
 }

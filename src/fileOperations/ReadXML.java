@@ -66,7 +66,7 @@ public class ReadXML {
     private void setBedNumber(Room tempRoom) {
         List<Patient> tempPatientList = tempRoom.getPatients();
         if (tempPatientList.size() <=5) {
-            tempRoom.setBedNumber(tempPatientList.size());
+            tempRoom.setBedNumber(5);
         } else{
             tempRoom.setBedNumber(5);
             for (int i = 5; i < tempPatientList.size(); i++) {

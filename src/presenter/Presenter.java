@@ -113,6 +113,10 @@ public class Presenter implements ActionListener {
             case "GENERATE_XML":
                 view.showErrorMessage("No implementado");
                 break;
+                case  "EXIT":
+                view.showSuccessMessage("Se cerró exitosamente el programa");
+                view.dispose();
+                break;
         }
     }
 

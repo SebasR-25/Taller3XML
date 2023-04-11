@@ -45,7 +45,8 @@ public class MainFrame extends JFrame {
 
     private void addMainPanel() {
         getContentPane().add(mainPanel);
-        mainPanel.getOutButton().addActionListener(e -> dispose());
+        mainPanel.getOutButton().addActionListener(actionListener);
+        mainPanel.getOutButton().setActionCommand("EXIT");
         mainPanel.getAddRoomButton().addActionListener(e -> {
             mainPanel.setVisible(false);
             roomPanel.setVisible(true);

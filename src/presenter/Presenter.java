@@ -16,11 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
-
-import org.xml.sax.SAXException;
 
 public class Presenter implements ActionListener {
     private MainFrame view;
@@ -49,9 +46,11 @@ public class Presenter implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         switch (actionEvent.getActionCommand()) {
             case "CREATE_PATIENT":
-                addPatient(view.getRoomNumberToPatient(), view.getPatientName(), view.getPatientLastName(), view.getContactPhoneNumber());
-                view.showSuccessMessage("Paciente creado con exito");
-                view.clearPatientFields();
+                try {
+                    addPatient(view.getRoomNumberToPatient(), view.getPatientName(), view.getPatientLastName(), view.getContactPhoneNumber());
+                } catch (NumberFormatException e) {
+                    view.showErrorMessage("Debe ingresar todos los datos");
+                }
                 break;
             case "CREATE_ROOM":
                 try {
@@ -81,6 +80,24 @@ public class Presenter implements ActionListener {
         }
     }
 
+    private void setPatientStatus(int roomNumber, String patient, Status status) {
+        for (Patient patient1 : roomManager.searchRoomByNumber(roomNumber).getPatients()) {
+            if ((patient1.getFirstName() + " " + patient1.getLastName()).equals(patient)) {
+                patient1.setStatus(status);
+            }
+        }
+    }
+
+
+    private List<String> patientsActive(int roomNumber) {
+        List<String> patients = new ArrayList<>();
+        for (Patient patient : roomManager.searchRoomByNumber(roomNumber).getPatients()) {
+            if (patient.getStatus() == Status.ACTIVE) {
+                patients.add(patient.getFirstName() + " " + patient.getLastName());
+            }
+        }
+        return patients;
+    }
     private void addRoom(int id, int floor, int roomNumber, int bedNumber) {
         if (id < 0 && roomNumber < 0) {
             view.showErrorMessage("Los datos ingresados no son validos");
@@ -135,8 +152,34 @@ public class Presenter implements ActionListener {
     }
 
     private void addPatient(int roomNumber, String firstName, String lastName, String contactPhoneNumber) {
-        Patient tempPatient = new Patient(contactPhoneNumber, firstName, lastName, Status.ACTIVE);
-        Room tempRoom = searchRoomByNumber(roomNumber);
-        roomManager.addPatient(tempRoom, tempPatient);
+        if (roomNumber < 0) {
+            view.showErrorMessage("El número de la habitación debe ser mayor que 0");
+        } else if (roomManager.searchRoomByNumber(roomNumber) == null) {
+            view.showErrorMessage("La habitación no existe");
+        } else if (firstName.isEmpty() || lastName.isEmpty() || contactPhoneNumber.isEmpty()) {
+            view.showErrorMessage("Debe ingresar todos los datos");
+        } else if (getPatiensActive(roomNumber) >= roomManager.searchRoomByNumber(roomNumber).getBedNumber()) {
+            view.showErrorMessage("La habitación está llena");
+            try {
+                String patient = view.patientToInactivate(roomNumber, patientsActive(roomNumber));
+                setPatientStatus(roomNumber, patient, Status.INACTIVE);
+                addPatient(roomNumber, firstName, lastName, contactPhoneNumber);
+            } catch (NullPointerException ignored) {
+            }
+        } else {
+            roomManager.searchRoomByNumber(roomNumber).addPatient(new Patient(contactPhoneNumber, firstName, lastName, Status.ACTIVE));
+            view.showSuccessMessage("El paciente ha sido creado");
+            view.clearPatientFields();
+        }
+    }
+
+    private int getPatiensActive(int roomNumber) {
+        int count = 0;
+        for (Patient patient : roomManager.searchRoomByNumber(roomNumber).getPatients()) {
+            if (patient.getStatus() == Status.ACTIVE) {
+                count++;
+            }
+        }
+        return count;
     }
 }

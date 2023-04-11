@@ -125,15 +125,19 @@ public class MainFrame extends JFrame {
     public String getRoomIdToSearch() {
         return historyPanel.getIdRoomField().getText();
     }
+
     public int getRoomNumberToPatient() {
         return Integer.parseInt(patientPanel.getRoomNumberField().getText());
     }
+
     public String getPatientName() {
         return patientPanel.getPatientNameField().getText();
     }
+
     public String getPatientLastName() {
         return patientPanel.getPatientLastNameField().getText();
     }
+
     public String getContactPhoneNumber() {
         return patientPanel.getPatientPhoneField().getText();
     }
@@ -164,5 +168,9 @@ public class MainFrame extends JFrame {
 
     public String getNewRoomBedNumber() {
         return roomPanel.getBedNumberTextField().getText();
+    }
+
+    public String patientToInactivate(int roomNumber, List<String> patients) {
+        return (JOptionPane.showInputDialog(this, "Se muestran los pacientes activos de la habitacion " + roomNumber + "\nSelecciona el paciente para inactivar", "Inactivate patient", JOptionPane.QUESTION_MESSAGE, null, patients.toArray(), patients.get(0)).toString());
     }
 }

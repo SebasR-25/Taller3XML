@@ -60,15 +60,24 @@ public class Presenter implements ActionListener {
                 }
                 break;
             case "SEARCH_ROOM":
-                Room room = searchRoom(Integer.parseInt(view.getRoomIdToSearch()));
-                if (room != null) {
-                    view.loadRoomToHistoryPanel(List.of(String.valueOf(room.getId()), String.valueOf(room.getRoomNumber()), String.valueOf(room.getFloorNumber()), String.valueOf(room.getBedNumber())), getPatientData(room));
+                try {
+                    Room room = searchRoom(Integer.parseInt(view.getRoomIdToSearch()));
+                    if (room != null) {
+                        view.loadRoomToHistoryPanel(List.of(String.valueOf(room.getId()), String.valueOf(room.getRoomNumber()), String.valueOf(room.getFloorNumber()), String.valueOf(room.getBedNumber())), getPatientData(room));
+                    }
+                } catch (NumberFormatException e) {
+                    view.showErrorMessage("Debe ingresar el id de la habitación");
                 }
                 break;
             case "GENERATE_XML":
-                view.showErrorMessage("No implementado");
+                try {
+                    writter.writeXML(roomManager.getRooms());
+                    view.showSuccessMessage("Se generó el archivo XML exitosamente");
+                } catch (ParserConfigurationException | TransformerFactoryConfigurationError | TransformerException e) {
+                    view.showErrorMessage("Se generó un error al escribir el archivo");
+                }
                 break;
-                case  "EXIT":
+            case "EXIT":
                 try {
                     writter.writeXML(roomManager.getRooms());
                 } catch (ParserConfigurationException | TransformerFactoryConfigurationError | TransformerException e) {
@@ -98,6 +107,7 @@ public class Presenter implements ActionListener {
         }
         return patients;
     }
+
     private void addRoom(int id, int floor, int roomNumber, int bedNumber) {
         if (id < 0 && roomNumber < 0) {
             view.showErrorMessage("Los datos ingresados no son validos");
@@ -158,7 +168,7 @@ public class Presenter implements ActionListener {
             view.showErrorMessage("La habitación no existe");
         } else if (firstName.isEmpty() || lastName.isEmpty() || contactPhoneNumber.isEmpty()) {
             view.showErrorMessage("Debe ingresar todos los datos");
-        } else if (getPatiensActive(roomNumber) >= roomManager.searchRoomByNumber(roomNumber).getBedNumber()) {
+        } else if (getPatientsActive(roomNumber) >= roomManager.searchRoomByNumber(roomNumber).getBedNumber()) {
             view.showErrorMessage("La habitación está llena");
             try {
                 String patient = view.patientToInactivate(roomNumber, patientsActive(roomNumber));
@@ -173,7 +183,7 @@ public class Presenter implements ActionListener {
         }
     }
 
-    private int getPatiensActive(int roomNumber) {
+    private int getPatientsActive(int roomNumber) {
         int count = 0;
         for (Patient patient : roomManager.searchRoomByNumber(roomNumber).getPatients()) {
             if (patient.getStatus() == Status.ACTIVE) {

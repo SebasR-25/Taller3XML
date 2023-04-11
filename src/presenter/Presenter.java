@@ -1,13 +1,17 @@
 package presenter;
 
+import fileOperations.ReadXML;
 import model.Patient;
 import model.Room;
 import model.RoomManager;
 import model.Status;
+import org.xml.sax.SAXException;
 import view.MainFrame;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,19 +111,19 @@ public class Presenter implements ActionListener {
         }
     }
 
-    private void addRoom(int id, int floor, int number, int bedNumber) {
-        if (id < 0 && number < 0) {
+    private void addRoom(int id, int floor, int roomNumber, int bedNumber) {
+        if (id < 0 && roomNumber < 0) {
             view.showErrorMessage("Los datos ingresados no son validos");
         } else if (roomManager.searchRoomById(id) != null) {
             view.showErrorMessage("La habitación ya existe");
         } else if (floor <= 0 || floor > 30) {
             view.showErrorMessage("El piso debe Estar entre 1 y 30");
-        } else if (roomManager.searchRoomByNumber(number) != null&&roomManager.searchRoomByNumber(number).getFloorNumber() == floor) {
+        } else if (roomManager.searchRoomByNumber(roomNumber) != null && roomManager.searchRoomByNumber(roomNumber).getFloorNumber() == floor) {
             view.showErrorMessage("El número de habitación ya existe en el piso");
         } else if (bedNumber <= 0 || bedNumber > 5) {
             view.showErrorMessage("La cantidad de camas debe estar entre 1 y 5");
         } else {
-            roomManager.addRoom(new Room(id, floor, number, new ArrayList<>(), bedNumber));
+            roomManager.addRoom(new Room(bedNumber, floor, id, new ArrayList<>(), roomNumber));
             view.showSuccessMessage("La habitación ha sido creada");
             view.clearRoomFields();
         }

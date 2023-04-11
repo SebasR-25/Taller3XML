@@ -32,9 +32,13 @@ public class Presenter implements ActionListener {
         writter = new WriteXML();
     }
 
-    private void start() throws SAXException, ParserConfigurationException, IOException {
-        readder.readXML();
-        roomManager.setRooms(readder.getReadRooms());
+    private void start(){
+        try {
+            readder.readXML();
+            roomManager.setRooms(readder.getReadRooms());
+        } catch (SAXException | ParserConfigurationException | IOException e) {
+            view.showSuccessMessage("No se encontró el archivo XML, se creará uno nuevo");
+        }
         view.start();
     }
 
